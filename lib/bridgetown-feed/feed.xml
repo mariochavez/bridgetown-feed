@@ -10,7 +10,7 @@
   <id>{{ page.url | absolute_url | xml_escape }}</id>
 
   {% assign title = site.metadata.title | default: site.metadata.name %}
-  {% if page.collection != "posts" %}
+  {% if page.collection != "pages" %}
     {% assign collection = page.collection | capitalize %}
     {% assign title = title | append: " | " | append: collection %}
   {% endif %}
@@ -41,6 +41,7 @@
 
   {% assign feed_collection = collections[page.collection] %}
   {% find posts where feed_collection.resources, draft != true %}
+  {% assign posts = posts | where: "category", "aprende" %}
   {% if page.category %}
     {% assign posts = posts | where: "category",page.category %}
   {% endif %}
