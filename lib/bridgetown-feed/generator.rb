@@ -8,6 +8,7 @@ module BridgetownFeed
     def generate(site)
       @site = site
       collections.each do |name, meta|
+        next if name == "posts"
         Bridgetown.logger.info "Bridgetown Feed:", "Generating feed for #{name}"
         (meta["categories"] + [nil]).each do |category|
           path = feed_path(collection: name, category: category)
