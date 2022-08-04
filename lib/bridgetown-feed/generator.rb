@@ -40,8 +40,9 @@ module BridgetownFeed
     # Will return `/feed/category.xml` for post categories
     # WIll return `/feed/collection.xml` for other collections
     # Will return `/feed/collection/category.xml` for other collection categories
-    def feed_path(collection: "posts", category: nil)
-      prefix = collection == "posts" ? "/feed" : "/feed/#{collection}"
+    def feed_path(collection: nil, category: nil)
+      default_collection = config.fetch("collection", "posts")
+      prefix = collection == default_collection ? "/feed" : "/feed/#{collection}"
       return "#{prefix}/#{category}.xml" if category
 
       collections.dig(collection, "path") || "#{prefix}.xml"
